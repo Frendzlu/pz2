@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 
+using System.Security.Cryptography;
 using Lab04;
 
 var territories = Utils.ReadCsvFile<Territory>("../../../data/territories.csv");
@@ -63,19 +64,32 @@ var regionEmployeeCountList = regionEmployeeCount.ToList();
 
 Utils.PrintList(regionEmployeeCountList);
 
-var employeeOrderCount = from order in orders
+var orderWithTotal = from order in orders
     join orderDetail in orderDetails on order.OrderId equals orderDetail.OrderId
-    join employee in employees on order.EmployeeId equals employee.Id
-    group orderDetail.UnitPrice * orderDetail.Quantity - orderDetail.Discount by employee.Name
+    group orderDetail by order
     into orderGroup
     select new
     {
-        EmployeeName = orderGroup.Key,
-        OrderCount = orderGroup.Count(),
-        AverageValue = orderGroup.Average(),
-        MaximumValue = orderGroup.Max(),
+        Order = orderGroup.Key,
+        TotalPrice = orderGroup.Sum(od => od.UnitPrice * od.Quantity * (1 - od.Discount))
     };
 
-var employeeOrderCountList = employeeOrderCount.ToList();
+var eoc = from od in orderWithTotal
+    join employee in employees on od.Order.EmployeeId equals employee.Id
+    group od by new
+    {
+        FullName = employee.ToString()
+    }
+    into god
+    select new
+    {
+        Employee = god.Key.FullName,
+        NumOfOrders = god.Count(),
+        AvgOrderValue = god.Average(od => od.TotalPrice),
+        MaxOrderValue = god.Max(od => od.TotalPrice),
+    };
+
+
+var employeeOrderCountList = eoc.ToList();
 
 Utils.PrintList(employeeOrderCountList);
