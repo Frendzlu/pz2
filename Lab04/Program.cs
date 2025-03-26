@@ -7,6 +7,8 @@ var territories = Utils.ReadCsvFile<Territory>("../../../data/territories.csv");
 var employees = Utils.ReadCsvFile<Employee>("../../../data/employees.csv");
 var employeeTerritories = Utils.ReadCsvFile<EmployeeTerritory>("../../../data/employee_territories.csv");
 var regions = Utils.ReadCsvFile<Region>("../../../data/regions.csv");
+var orders = Utils.ReadCsvFile<Order>("../../../data/orders.csv");
+var orderDetails = Utils.ReadCsvFile<OrderDetails>("../../../data/orders_details.csv");
 // Console.WriteLine("Territories length: " + territories.Count);
 // Console.WriteLine("Employees length: " + employees.Count);
 // Console.WriteLine("EmpTer length: " + employeeTerritories.Count);
@@ -60,3 +62,20 @@ var regionEmployeeCount = from region in regions
 var regionEmployeeCountList = regionEmployeeCount.ToList();
 
 Utils.PrintList(regionEmployeeCountList);
+
+var employeeOrderCount = from order in orders
+    join orderDetail in orderDetails on order.OrderId equals orderDetail.OrderId
+    join employee in employees on order.EmployeeId equals employee.Id
+    group orderDetail.UnitPrice * orderDetail.Quantity - orderDetail.Discount by employee.Name
+    into orderGroup
+    select new
+    {
+        EmployeeName = orderGroup.Key,
+        OrderCount = orderGroup.Count(),
+        AverageValue = orderGroup.Average(),
+        MaximumValue = orderGroup.Max(),
+    };
+
+var employeeOrderCountList = employeeOrderCount.ToList();
+
+Utils.PrintList(employeeOrderCountList);
