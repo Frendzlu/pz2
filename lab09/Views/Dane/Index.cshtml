@@ -1,0 +1,8 @@
+﻿<h2>Dane w bazie:</h2>
+<ul>
+    @foreach (var d in Model)
+    {
+        <li>@d.Tresc</li>
+    }
+</ul>
+<a asp-action="Dodaj">Dodaj nowe dane</a>
