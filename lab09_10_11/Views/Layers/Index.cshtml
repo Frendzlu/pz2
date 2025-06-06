@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Layer>
+
+@{
+    ViewData["Title"] = "Layers";
+}
+
+<h2>Layers</h2>
+
+<a class="btn btn-primary mb-2" asp-action="Create">Create New Layer</a>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Tile Count</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var layer in Model) {
+        <tr>
+            <td>@layer.LayerName</td>
+            <td>@(layer.Levels.Count)</td>
+            <td>
+                <a class="btn btn-sm btn-info" asp-action="Edit" asp-route-id="@layer.Id">Edit</a>
+                <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@layer.Id">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,21 @@
+﻿@model lab09.Models.Level
+
+@{
+    ViewData["Title"] = "Delete Level";
+}
+
+<h1>Delete Level</h1>
+
+<h3>Are you sure you want to delete this level?</h3>
+
+<div>
+    <h4>@Model.Name</h4>
+    <p>Act: @Model.Act?.ActName</p>
+    <p>Layer: @Model.Layer?.LayerName</p>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

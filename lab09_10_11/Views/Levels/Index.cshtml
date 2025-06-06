@@ -1,0 +1,46 @@
+﻿@model IEnumerable<lab09.Models.Level>
+
+@{
+    ViewData["Title"] = "Levels";
+}
+
+<h1>Levels</h1>
+
+<p>
+    <a asp-action="Create">Create New Level</a>
+</p>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Act</th>
+        <th>Layer</th>
+        <th>Challenge</th>
+        <th>Enemies</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var level in Model)
+    {
+        <tr>
+            <td>@level.Name</td>
+            <td>@level.Act?.ActName</td>
+            <td>@level.Layer?.LayerName</td>
+            <td>@level.Challenge</td>
+            <td>
+                @foreach(var el in level.EnemiesLevels ?? Enumerable.Empty<lab09.Models.EnemiesLevels>())
+                {
+                    @el.Enemy?.Name <br />
+                }
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@level.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@level.Id" 
+                   onclick="return confirm('Are you sure you want to delete this level?');">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

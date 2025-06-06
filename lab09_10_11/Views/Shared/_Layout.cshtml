@@ -1,0 +1,44 @@
+﻿<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-controller="IO" asp-action="Panel">lab09_10_11</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    @if (Context.Session.GetString("zalogowany") == "true")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="IO" asp-action="Panel">Panel</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Dane" asp-action="Index">Dane</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Levels" asp-action="Index">Levels</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Acts" asp-action="Index">Acts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Enemies" asp-action="Index">Enemies</a>
+                        </li>
+                        <li class="nav-item">
+                            <form asp-controller="IO" asp-action="Wyloguj" method="post" class="d-inline">
+                                <button class="nav-link btn btn-link" type="submit">Wyloguj</button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="IO" asp-action="Logowanie">Logowanie</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+            @RenderBody()
+        </div>
+    </nav>
+</header>

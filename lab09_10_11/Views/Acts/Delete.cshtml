@@ -1,0 +1,8 @@
+﻿@model Act
+<h2>Delete Act</h2>
+<p>Are you sure you want to delete '@Model.ActName'?</p>
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit">Yes</button>
+    <a asp-action="Index">No</a>
+</form>

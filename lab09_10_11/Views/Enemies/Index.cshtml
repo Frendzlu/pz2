@@ -1,0 +1,34 @@
+﻿@model IEnumerable<lab09.Models.Enemy>
+
+<h1>Enemies</h1>
+
+<p>
+    <a asp-action="Create">Create New Enemy</a>
+</p>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Health</th>
+        <th>Weight</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var enemy in Model)
+    {
+        <tr>
+            <td>@enemy.Name</td>
+            <td>@enemy.Type</td>
+            <td>@enemy.Health</td>
+            <td>@enemy.Weight</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@enemy.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@enemy.Id" onclick="return confirm('Delete this enemy?');">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

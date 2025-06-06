@@ -1,0 +1,17 @@
+﻿@model Layer
+
+@{
+    ViewData["Title"] = "Create Layer";
+}
+
+<h2>Create Layer</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="LayerName" class="form-label"></label>
+        <input asp-for="LayerName" class="form-control" />
+        <span asp-validation-for="LayerName" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-success">Create</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

@@ -1,0 +1,18 @@
+﻿@model Layer
+
+@{
+    ViewData["Title"] = "Edit Layer";
+}
+
+<h2>Edit Layer</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label asp-for="LayerName" class="form-label"></label>
+        <input asp-for="LayerName" class="form-control" />
+        <span asp-validation-for="LayerName" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

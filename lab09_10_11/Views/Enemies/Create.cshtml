@@ -1,0 +1,28 @@
+﻿@model lab09.Models.Enemy
+
+<h1>Create Enemy</h1>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Type"></label>
+        <input asp-for="Type" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Health"></label>
+        <input asp-for="Health" type="number" step="any" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Weight"></label>
+        <input asp-for="Weight" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</form>

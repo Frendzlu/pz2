@@ -1,0 +1,8 @@
+﻿@{
+    ViewData["Title"] = "Panel";
+    var login = Context.Session.GetString("username") ?? "Nieznany użytkownik";
+}
+<h2>Witaj, @login, jesteś zalogowany!</h2>
+<form method="post" asp-action="Wyloguj">
+    <button type="submit">Wyloguj</button>
+</form>

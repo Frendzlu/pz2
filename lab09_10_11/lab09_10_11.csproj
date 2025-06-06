@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>lab09</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.20" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.20" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\Dane\Dodaj.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Dane\Index.cshtml" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,12 @@
+﻿@model Act
+
+<h2>Edit Act</h2>
+<form asp-action="Edit">
+    <input asp-for="Id" type="hidden" />
+    <div>
+        <label asp-for="ActName">ActName</label>
+        <input asp-for="ActName" />
+    </div>
+    <button type="submit">Save</button>
+</form>
+<a asp-action="Index">Back to List</a>

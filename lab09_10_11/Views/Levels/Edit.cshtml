@@ -1,0 +1,46 @@
+﻿@model lab09.Models.Level
+
+@{
+    ViewData["Title"] = "Edit Level";
+}
+
+<h1>Edit Level</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Act</label>
+        <select asp-for="LayerId" asp-items="@(new SelectList(ViewBag.Acts ?? Enumerable.Empty<lab09.Models.Act>(), "Id", "ActName"))" class="form-control"></select>
+    </div>
+
+    <div class="form-group">
+        <label>Layer</label>
+        <select asp-for="LayerId" asp-items="@(new SelectList(ViewBag.Layers ?? Enumerable.Empty<lab09.Models.Layer>(), "Id", "LayerName"))" class="form-control"></select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Challenge"></label>
+        <input asp-for="Challenge" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Enemies</label><br />
+        @{
+            var selectedEnemyIds = ViewBag.SelectedEnemyIds as int[] ?? new int[0];
+            foreach (var enemy in ViewBag.AllEnemies as List<lab09.Models.Enemy>)
+            {
+                <input type="checkbox" name="selectedEnemies" value="@enemy.Id" 
+                       @(selectedEnemyIds.Contains(enemy.Id) ? "checked" : "") /> @enemy.Name <br />
+            }
+        }
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</form>
